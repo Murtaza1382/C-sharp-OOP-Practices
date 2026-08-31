@@ -379,3 +379,34 @@ new BankAccount("ACC-001", "Murtaza", 1000).displayInfo();
             . Shared settings
             . Constants
 -= Static Method : A static method belongs to the class, not to an object.
+===================> code in Java <====================
+public class BankAccount
+{
+    public static String bankName = "Kabul Bank";
+
+    public static void displayBankName()
+    {
+        System.out.println(bankName);
+    }
+}
+BankAccount.displayBankName();
+
+ -= Restrictions of Static Methods : Because a static method belongs to the class, it doesn't automatically know which object you mean.
+        - Static methods cannot directly access instance variables : 
+        =================> code in Java <===============
+        static void test()
+                {
+                    System.out.println(ownerName); // it gives error
+                }
+        - Static methods cannot directly call instance methods : 
+        static void test()
+                {
+                    deposit(100); // gives error
+                }
+        - Static methods cannot use this : 
+        static void test()
+                {
+                    System.out.println(this.ownerName);
+                }
+
+ -= 

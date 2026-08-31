@@ -11,12 +11,18 @@ namespace Classes
         private string ownerName;
         private decimal balance;
 
-// Constructor
+        // static variable
+        public static int totalAccounts = 0;
+        public static String bankName = "Kabul Bank";
+        // Constructor
         public BankAccount(string accountNumber, string ownerName, decimal initialBalance)
         {
             this.accountNumber = accountNumber;
             this.ownerName = ownerName;
             balance = initialBalance;
+
+            // incrementing static variable
+            totalAccounts ++;
         }
 
         // Mehtods
@@ -50,5 +56,11 @@ namespace Classes
             Console.WriteLine($"Balance: {balance}");
         }
 
+        // static methods
+
+        public static void displayBankName()
+        {
+            Console.WriteLine(bankName);
+        }
     }
 }
