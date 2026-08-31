@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Classes
 {
-    internal class BankAccount
+    public class BankAccount
     {
 // Fields / Insatnce Variables 
-        private string accountNumber;
-        private string ownerName;
-        private decimal balance;
+        protected string accountNumber;
+        protected string ownerName;
+        protected decimal balance;
 
         // static variable
         public static int totalAccounts = 0;
@@ -61,6 +61,28 @@ namespace Classes
         public static void displayBankName()
         {
             Console.WriteLine(bankName);
+        }
+    }
+
+
+    public class SavingsAccount : BankAccount
+    {
+        private decimal InterestRate;
+
+        public SavingsAccount(
+            string accountNumber,
+            string ownerName,
+            decimal balance,
+            decimal interestRate)
+
+            : base(accountNumber, ownerName, balance)
+        {
+            InterestRate = interestRate;
+        }
+
+        public void AddInterest()
+        {
+            balance += balance * InterestRate / 100;
         }
     }
 }

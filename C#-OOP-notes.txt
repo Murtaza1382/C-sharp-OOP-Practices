@@ -2175,3 +2175,569 @@ BankAccount account2 =
 account1.deposit(500);
 
 BankAccount.displayBankInfo();
+
+
+ -= Inheritance : Inheritance is an OOP mechanism where one class can reuse and acquire the properties and behaviors of another class.
+        example : BankAccount Can be called: Parent class, Base class, Superclass and SavingsAccount Can be called:  Child class, Derived class, Subclass 
+
+ -= Why Do We Use Inheritance? -> The biggest reason is: Code reuse
+
+ Note : 
+        - without inheritance 
+            SavingsAccount
+            ├── accountNumber
+            ├── ownerName
+            ├── balance
+            ├── deposit()
+            └── withdraw()
+
+            CurrentAccount
+            ├── accountNumber
+            ├── ownerName
+            ├── balance
+            ├── deposit()
+            └── withdraw()
+
+        - with inheritance
+                          BankAccount
+              ───────────
+              accountNumber
+              ownerName
+              balance
+              deposit()
+              withdraw()
+                    │
+          ┌─────────┴─────────┐
+          ▼                   ▼
+   SavingsAccount      CurrentAccount
+   interestRate        overdraftLimit
+
+
+
+ -= Advantages of Inheritance : 
+        - Code Reusability
+        - Easier Maintenance
+        - Better Organization
+      
+
+ -= Syntax of Inheritance : 
+        =================> Java
+        class Child extends Parent
+        class SavingsAccount extends BankAccount
+        {
+        }
+        =================> C#
+        class Child : Parent
+        class SavingsAccount : BankAccount
+            {
+            }
+        ==================> Python
+        class Child(Parent):
+            pass
+        class SavingsAccount(BankAccount):
+            pass
+
+
+Note : Super() -> calls the constructor of the parent class.
+
+ -= Types of Inheritance : 
+        - Single Inheritance : One child inherits from one parent.
+            =========> Java
+            class SavingsAccount extends BankAccount
+                {
+                }
+            ==========> C#
+            class SavingsAccount : BankAccount
+                {
+                }
+            ==========> Python
+            class SavingsAccount(BankAccount):
+                pass
+
+        - Multilevel Inheritance : A class inherits from another class, which itself inherits from another class.
+            ========> Java
+                class Account
+                    {
+                        void identify()
+                        {
+                            System.out.println("I am an account");
+                        }
+                    }
+
+                    class BankAccount extends Account
+                    {
+                    }
+
+                    class SavingsAccount extends BankAccount
+                    {
+                    }
+            
+        - Hierarchical Inheritance : Multiple child classes inherit from one parent.
+            =============> Java
+                class SavingsAccount extends BankAccount
+                    {
+                    }
+
+                    class CurrentAccount extends BankAccount
+                    {
+                    }
+
+                    class BusinessAccount extends BankAccount
+                    {
+                    }
+
+        - Multiple Inheritance : One child inherits from multiple parents.
+            =================> Python supports this directly
+            class OnlineBanking:
+                pass
+
+
+            class LoanService:
+                pass
+
+
+            class SmartBankAccount(
+                OnlineBanking,
+                LoanService
+            ):
+                pass
+
+        - Hybrid Inheritance : Hybrid inheritance means a combination of different inheritance types.
+
+
+ -= Method Overloading : Multiple methods with the same name but different parameter lists.
+        ========================> Java
+        public class BankAccount
+            {
+                double balance;
+
+
+                public void deposit(double amount)
+                {
+                    balance += amount;
+                }
+
+
+                public void deposit(double amount, String description)
+                {
+                    balance += amount;
+
+                    System.out.println(
+                        "Deposit Description: " + description
+                    );
+                }
+            }
+
+            account.deposit(500);
+
+                account.deposit(
+                    500,
+                    "Monthly Salary"
+                );
+        ================> C# 
+            public class BankAccount
+                    {
+                        public decimal Balance;
+
+                        public void Deposit(decimal amount)
+                        {
+                            Balance += amount;
+                        }
+
+                        public void Deposit(
+                            decimal amount,
+                            string description)
+                        {
+                            Balance += amount;
+
+                            Console.WriteLine(
+                                $"Description: {description}"
+                            );
+                        }
+                    }
+                    account.Deposit(500);
+
+                    account.Deposit(
+                        500,
+                        "Monthly Salary"
+                    );
+
+
+        ===============> Python 
+        Python does not support traditional method overloading like Java and C#.
+        class BankAccount:
+
+    def deposit(self, amount):
+        print(amount)
+
+    def deposit(self, amount, description):
+        print(amount, description)
+        The second method replaces the first one.
+        class BankAccount:
+
+    def deposit(
+        self,
+        amount,
+        description=None
+    ):
+
+        self.balance += amount
+
+        if description:
+            print(f"Description: {description}")
+
+
+ -= Method Overriding : Method overriding happens when a child class provides its own version of a method inherited from the parent class.
+ =================> Java <============
+ public class BankAccount
+        {
+            protected double balance;
+
+            public void withdraw(double amount)
+            {
+                if (amount <= balance)
+                {
+                    balance -= amount;
+
+                    System.out.println(
+                        "Money withdrawn from regular account."
+                    );
+                }
+            }
+        }
+  public class SavingsAccount extends BankAccount
+        {
+            @Override
+            public void withdraw(double amount)
+            {
+                if (amount <= balance)
+                {
+                    balance -= amount;
+
+                    System.out.println(
+                        "Money withdrawn from savings account."
+                    );
+                }
+            }
+        } 
+
+===============> C# <============
+public class BankAccount
+        {
+            protected decimal Balance;
+
+            public virtual void Withdraw(decimal amount)
+            {
+                if (amount <= Balance)
+                {
+                    Balance -= amount;
+
+                    Console.WriteLine(
+                        "Regular account withdrawal."
+                    );
+                }
+            }
+        }
+public class SavingsAccount : BankAccount
+        {
+            public override void Withdraw(decimal amount)
+            {
+                if (amount <= Balance)
+                {
+                    Balance -= amount;
+
+                    Console.WriteLine(
+                        "Savings account withdrawal."
+                    );
+                }
+            }
+        }
+
+=============================> Python
+class BankAccount:
+
+    def withdraw(self, amount):
+
+        if amount <= self.balance:
+            self.balance -= amount
+
+            print(
+                "Regular account withdrawal"
+            )
+
+class SavingsAccount(BankAccount):
+
+    def withdraw(self, amount):
+
+        if amount <= self.balance:
+            self.balance -= amount
+
+            print(
+                "Savings account withdrawal"
+            )
+
+
+==================== a Section summarization of the inheritance 
+=============> Java
+public class BankAccount
+{
+    protected String accountNumber;
+    protected String ownerName;
+    protected double balance;
+
+    public BankAccount(
+        String accountNumber,
+        String ownerName,
+        double balance)
+    {
+        this.accountNumber = accountNumber;
+        this.ownerName = ownerName;
+        this.balance = balance;
+    }
+
+
+    // METHOD OVERLOADING
+
+    public void deposit(double amount)
+    {
+        balance += amount;
+    }
+
+    public void deposit(
+        double amount,
+        String description)
+    {
+        balance += amount;
+
+        System.out.println(
+            "Description: " + description
+        );
+    }
+
+
+    // METHOD THAT CAN BE OVERRIDDEN
+
+    public void withdraw(double amount)
+    {
+        if (amount <= balance)
+        {
+            balance -= amount;
+
+            System.out.println(
+                "Regular withdrawal successful."
+            );
+        }
+    }
+}
+
+public class SavingsAccount extends BankAccount
+{
+    private double interestRate;
+
+    public SavingsAccount(
+        String accountNumber,
+        String ownerName,
+        double balance,
+        double interestRate)
+    {
+        super(accountNumber, ownerName, balance);
+
+        this.interestRate = interestRate;
+    }
+
+
+    // METHOD OVERRIDING
+
+    @Override
+    public void withdraw(double amount)
+    {
+        if (amount <= balance)
+        {
+            balance -= amount;
+
+            System.out.println(
+                "Savings withdrawal successful."
+            );
+        }
+    }
+
+
+    public void addInterest()
+    {
+        balance +=
+            balance * interestRate / 100;
+    }
+}
+
+
+===============> C#
+public class BankAccount
+{
+    protected string AccountNumber;
+    protected string OwnerName;
+    protected decimal Balance;
+
+    public BankAccount(
+        string accountNumber,
+        string ownerName,
+        decimal balance)
+    {
+        AccountNumber = accountNumber;
+        OwnerName = ownerName;
+        Balance = balance;
+    }
+
+
+    // METHOD OVERLOADING
+
+    public void Deposit(decimal amount)
+    {
+        Balance += amount;
+    }
+
+    public void Deposit(
+        decimal amount,
+        string description)
+    {
+        Balance += amount;
+
+        Console.WriteLine(
+            $"Description: {description}"
+        );
+    }
+
+
+    // METHOD OVERRIDING SUPPORT
+
+    public virtual void Withdraw(decimal amount)
+    {
+        if (amount <= Balance)
+        {
+            Balance -= amount;
+
+            Console.WriteLine(
+                "Regular withdrawal successful."
+            );
+        }
+    }
+}public class SavingsAccount : BankAccount
+{
+    private decimal InterestRate;
+
+    public SavingsAccount(
+        string accountNumber,
+        string ownerName,
+        decimal balance,
+        decimal interestRate)
+
+        : base(
+            accountNumber,
+            ownerName,
+            balance)
+    {
+        InterestRate = interestRate;
+    }
+
+
+    // METHOD OVERRIDING
+
+    public override void Withdraw(decimal amount)
+    {
+        if (amount <= Balance)
+        {
+            Balance -= amount;
+
+            Console.WriteLine(
+                "Savings withdrawal successful."
+            );
+        }
+    }
+
+
+    public void AddInterest()
+    {
+        Balance +=
+            Balance * InterestRate / 100;
+    }
+}
+
+====================> Python
+class BankAccount:
+
+    def __init__(
+        self,
+        account_number,
+        owner_name,
+        balance
+    ):
+        self.account_number = account_number
+        self.owner_name = owner_name
+        self.balance = balance
+
+
+    # PYTHON-STYLE "OVERLOADING"
+    # USING DEFAULT PARAMETERS
+
+    def deposit(
+        self,
+        amount,
+        description=None
+    ):
+
+        self.balance += amount
+
+        if description:
+            print(
+                f"Description: {description}"
+            )
+
+
+    def withdraw(self, amount):
+
+        if amount <= self.balance:
+
+            self.balance -= amount
+
+            print(
+                "Regular withdrawal successful."
+            )
+
+
+    class SavingsAccount(BankAccount):
+
+    def __init__(
+        self,
+        account_number,
+        owner_name,
+        balance,
+        interest_rate
+    ):
+
+        super().__init__(
+            account_number,
+            owner_name,
+            balance
+        )
+
+        self.interest_rate = interest_rate
+
+
+    # METHOD OVERRIDING
+
+    def withdraw(self, amount):
+
+        if amount <= self.balance:
+
+            self.balance -= amount
+
+            print(
+                "Savings withdrawal successful."
+            )
+
+
+    def add_interest(self):
+
+        self.balance += (
+            self.balance *
+            self.interest_rate / 100
+        )
