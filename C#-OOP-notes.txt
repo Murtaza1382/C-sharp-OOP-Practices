@@ -409,4 +409,36 @@ BankAccount.displayBankName();
                     System.out.println(this.ownerName);
                 }
 
- -= 
+ -= Static Block : ⚠️ Static blocks exist in Java but not in the same form in C#. A static block is used to initialize static data.
+
+ =======================> code in Java <==============
+ public class BankAccount
+{
+    static String bankName;
+    static int totalAccounts;
+
+    static
+    {
+        bankName = "Kabul Bank";
+        totalAccounts = 0;
+
+        System.out.println("Bank system initialized!");
+    }
+}
+
+Note  : The static block runs once, when the class is initialized by the JVM
+
+! - C# Equivalent : C# usually uses a static constructor 
+        public class BankAccount
+        {
+            public static string BankName;
+
+            static BankAccount()
+            {
+                BankName = "Kabul Bank";
+
+                Console.WriteLine(
+                    "Bank system initialized!"
+                );
+            }
+        }
