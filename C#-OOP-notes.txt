@@ -442,3 +442,1736 @@ Note  : The static block runs once, when the class is initialized by the JVM
                 );
             }
         }
+
+
+ -= The this Keyword : means The current object.
+
+ =========================> code in Java <================
+             public class BankAccount
+            {
+                String ownerName;
+
+                BankAccount(String ownerName)
+                {
+                    this.ownerName = ownerName;
+                }
+            }
+
+            BankAccount account =
+                new BankAccount("Murtaza");
+
+ -= Other Uses of this : 
+         - Access current object's fields 
+         - Call another method of the current object
+         - Call another constructor : This is where: this() comes in.
+         - this() — Constructor Chaining.
+         ==================> code in Java <================
+                     public class BankAccount
+            {
+                String accountNumber;
+                String ownerName;
+                double balance;
+
+
+                // Constructor 1
+                public BankAccount()
+                {
+                    this("UNKNOWN", "Unknown", 0);
+                }
+
+
+                // Constructor 2
+                public BankAccount(String ownerName)
+                {
+                    this("UNKNOWN", ownerName, 0);
+                }
+
+
+                // Constructor 3
+                public BankAccount(
+                    String accountNumber,
+                    String ownerName,
+                    double balance)
+                {
+                    this.accountNumber = accountNumber;
+                    this.ownerName = ownerName;
+                    this.balance = balance;
+                }
+            }
+
+            BankAccount account1 =
+    new BankAccount();
+
+ -= Important Rule of this() : In Java: this() must be the first statement inside a constructor.
+
+ Correct:
+         public BankAccount()
+        {
+            this("UNKNOWN", "Unknown", 0);
+        }
+
+Wrong:
+    public BankAccount()
+{
+    System.out.println("Creating account");
+
+    this("UNKNOWN", "Unknown", 0); // ❌
+}
+
+! - Today 6:02 PM
+tell me what is class and give create for me a class with fields ✓ methods ✓ constructors ✓ blocks   and instance variable in C#, Java and Python consider that in hte next chats I well ask you other oop concepts with example so make a class by the name of bankaccount and on the other concepts use this and add meaningfull features tell me first what is oop and why is it oop and tell me what is class and why do we call it class and at first why the creators said class and oop 
+
+Great question. Since you want to learn OOP deeply, we'll build everything around one evolving example: BankAccount. In future questions about objects, encapsulation, inheritance, polymorphism, abstraction, etc., we can continue improving this same example.
+
+1. What is OOP?
+
+OOP stands for:
+
+Object-Oriented Programming
+
+It is a programming paradigm where we organize programs around objects.
+
+Instead of thinking only:
+
+"What functions should my program perform?"
+
+OOP also asks:
+
+"What things (objects) exist in my system, what data do they have, and what can they do?"
+
+For example, in a banking system:
+
+A BankAccount
+A Customer
+A Bank
+A Transaction
+
+Each of these can be represented as an object.
+
+Why is it called "Object-Oriented"?
+
+Let's break the name into two parts:
+
+Object
+
+An object represents a thing with:
+
+State → data it has
+Behavior → things it can do
+
+For example:
+
+Bank Account
+
+State:
+
+Account Number
+Owner Name
+Balance
+
+Behavior:
+
+Deposit money
+Withdraw money
+Transfer money
+Display account information
+
+So an object combines:
+
+Data + Behavior
+
+Oriented
+
+"Oriented" means the programming style is organized around objects.
+
+So:
+
+Object-Oriented Programming = Programming organized around objects.
+
+2. Why was OOP created?
+
+Before OOP, many programs were primarily organized around:
+
+Functions
+Procedures
+Data structures
+
+For small programs, this works very well.
+
+But as software became larger, developers faced problems:
+
+❌ Data was separated from the functions manipulating it.
+
+❌ Large programs became difficult to organize.
+
+❌ Code became difficult to reuse.
+
+❌ Changes in one part could affect many other parts.
+
+❌ Modeling real-world systems was harder.
+
+OOP introduced a way to group related things together:
+
+BankAccount
+│
+├── Data
+│   ├── ownerName
+│   ├── accountNumber
+│   └── balance
+│
+└── Behavior
+    ├── Deposit()
+    ├── Withdraw()
+    └── DisplayInfo()
+
+This makes programs easier to:
+
+Organize
+Maintain
+Reuse
+Extend
+Model complex systems
+3. What is a Class?
+
+A class is a blueprint, template, or definition used to create objects.
+
+For example:
+
+Class
+BankAccount
+
+The class describes what every bank account should have.
+
+BankAccount
+
+Data:
+- Account Number
+- Owner Name
+- Balance
+
+Behavior:
+- Deposit
+- Withdraw
+- Display Information
+
+But the class itself is not a specific bank account.
+
+It is the definition for creating bank accounts.
+
+4. Why is it called a "Class"?
+
+This is an interesting and deeper question.
+
+The word class existed long before programming.
+
+In ordinary language, a class means:
+
+A group or category of things that share common characteristics.
+
+For example:
+
+Class of Animals
+
+Animals in this category may share certain characteristics.
+
+Class of Cars
+
+Cars may have:
+
+Brand
+Model
+Color
+Engine
+
+Similarly, in programming:
+
+Class: BankAccount
+
+represents a category of objects that share common properties and behaviors.
+
+For example:
+
+BankAccount #1
+Owner: Murtaza
+Balance: $1,000
+
+and:
+
+BankAccount #2
+Owner: Ali
+Balance: $500
+
+Both are different objects, but they belong to the same class:
+
+BankAccount
+
+Therefore, the word class is very meaningful:
+
+A class defines the common characteristics and behavior shared by a group of objects.
+
+5. Class vs Object
+
+This is one of the most important concepts in OOP.
+
+Class = Blueprint 🏗️
+BankAccount
+Object = Actual thing created from the blueprint 🏦
+Murtaza's Bank Account
+Ali's Bank Account
+Ahmad's Bank Account
+
+For example:
+
+CLASS
+┌─────────────────────┐
+│ BankAccount         │
+├─────────────────────┤
+│ ownerName           │
+│ accountNumber       │
+│ balance             │
+├─────────────────────┤
+│ Deposit()           │
+│ Withdraw()          │
+└─────────────────────┘
+
+From this one class, we can create many objects:
+
+┌──────────────────┐
+│ Murtaza Account  │
+│ Balance: $1000   │
+└──────────────────┘
+
+┌──────────────────┐
+│ Ali Account      │
+│ Balance: $500    │
+└──────────────────┘
+
+┌──────────────────┐
+│ Ahmad Account    │
+│ Balance: $2000   │
+└──────────────────┘
+6. Important Parts of a Class
+
+We'll use these concepts:
+
+✅ Fields
+✅ Instance Variables
+✅ Methods
+✅ Constructors
+✅ Blocks
+
+Let's build the same BankAccount in:
+
+C#
+Java
+Python
+🇨🇸 BankAccount in C#
+public class BankAccount
+{
+    // =========================================
+    // 1. FIELDS / INSTANCE VARIABLES
+    // =========================================
+
+    private string accountNumber;
+    private string ownerName;
+    private decimal balance;
+
+
+    // =========================================
+    // 2. CONSTRUCTOR
+    // =========================================
+
+    public BankAccount(string accountNumber, string ownerName, decimal initialBalance)
+    {
+        this.accountNumber = accountNumber;
+        this.ownerName = ownerName;
+        balance = initialBalance;
+    }
+
+
+    // =========================================
+    // 3. METHODS
+    // =========================================
+
+    public void Deposit(decimal amount)
+    {
+        if (amount > 0)
+        {
+            balance += amount;
+            Console.WriteLine($"Deposited: {amount}");
+        }
+    }
+
+    public void Withdraw(decimal amount)
+    {
+        if (amount > 0 && amount <= balance)
+        {
+            balance -= amount;
+            Console.WriteLine($"Withdrawn: {amount}");
+        }
+        else
+        {
+            Console.WriteLine("Invalid withdrawal.");
+        }
+    }
+
+    public void DisplayAccountInfo()
+    {
+        Console.WriteLine("----- BANK ACCOUNT -----");
+        Console.WriteLine($"Account Number: {accountNumber}");
+        Console.WriteLine($"Owner: {ownerName}");
+        Console.WriteLine($"Balance: {balance}");
+    }
+}
+Creating an Object
+BankAccount account1 =
+    new BankAccount("ACC-001", "Murtaza", 1000);
+
+account1.Deposit(500);
+
+account1.Withdraw(200);
+
+account1.DisplayAccountInfo();
+☕ BankAccount in Java
+public class BankAccount {
+
+    // =========================================
+    // 1. FIELDS / INSTANCE VARIABLES
+    // =========================================
+
+    private String accountNumber;
+    private String ownerName;
+    private double balance;
+
+
+    // =========================================
+    // 2. CONSTRUCTOR
+    // =========================================
+
+    public BankAccount(
+        String accountNumber,
+        String ownerName,
+        double initialBalance
+    ) {
+        this.accountNumber = accountNumber;
+        this.ownerName = ownerName;
+        this.balance = initialBalance;
+    }
+
+
+    // =========================================
+    // 3. METHODS
+    // =========================================
+
+    public void deposit(double amount) {
+
+        if (amount > 0) {
+            balance += amount;
+
+            System.out.println(
+                "Deposited: " + amount
+            );
+        }
+    }
+
+
+    public void withdraw(double amount) {
+
+        if (amount > 0 && amount <= balance) {
+
+            balance -= amount;
+
+            System.out.println(
+                "Withdrawn: " + amount
+            );
+
+        } else {
+
+            System.out.println(
+                "Invalid withdrawal."
+            );
+        }
+    }
+
+
+    public void displayAccountInfo() {
+
+        System.out.println("----- BANK ACCOUNT -----");
+
+        System.out.println(
+            "Account Number: " + accountNumber
+        );
+
+        System.out.println(
+            "Owner: " + ownerName
+        );
+
+        System.out.println(
+            "Balance: " + balance
+        );
+    }
+}
+Creating an Object
+BankAccount account1 =
+    new BankAccount(
+        "ACC-001",
+        "Murtaza",
+        1000
+    );
+
+account1.deposit(500);
+
+account1.withdraw(200);
+
+account1.displayAccountInfo();
+🐍 BankAccount in Python
+
+Python is slightly different because it doesn't use a traditional new keyword or explicit access modifiers like C# and Java.
+
+class BankAccount:
+
+    # =========================================
+    # 1. CONSTRUCTOR
+    # =========================================
+
+    def __init__(
+        self,
+        account_number,
+        owner_name,
+        initial_balance
+    ):
+
+        # =====================================
+        # 2. INSTANCE VARIABLES
+        # =====================================
+
+        self.account_number = account_number
+        self.owner_name = owner_name
+        self.balance = initial_balance
+
+
+    # =========================================
+    # 3. METHODS
+    # =========================================
+
+    def deposit(self, amount):
+
+        if amount > 0:
+            self.balance += amount
+
+            print(f"Deposited: {amount}")
+
+
+    def withdraw(self, amount):
+
+        if amount > 0 and amount <= self.balance:
+
+            self.balance -= amount
+
+            print(f"Withdrawn: {amount}")
+
+        else:
+
+            print("Invalid withdrawal.")
+
+
+    def display_account_info(self):
+
+        print("----- BANK ACCOUNT -----")
+
+        print(
+            f"Account Number: {self.account_number}"
+        )
+
+        print(
+            f"Owner: {self.owner_name}"
+        )
+
+        print(
+            f"Balance: {self.balance}"
+        )
+Creating an Object
+account1 = BankAccount(
+    "ACC-001",
+    "Murtaza",
+    1000
+)
+
+account1.deposit(500)
+
+account1.withdraw(200)
+
+account1.display_account_info()
+7. What are Fields / Instance Variables?
+
+Look at this:
+
+C#
+private string accountNumber;
+private string ownerName;
+private decimal balance;
+
+These variables store the state of each object.
+
+For example:
+
+Object 1
+
+accountNumber = ACC-001
+ownerName = Murtaza
+balance = 1000
+
+Another object:
+
+Object 2
+
+accountNumber = ACC-002
+ownerName = Ali
+balance = 500
+
+Each object has its own values.
+
+That's why they're called:
+
+Instance variables
+
+Because they belong to an instance (object) of the class.
+
+8. What is a Method?
+
+A method is a function that belongs to a class or object.
+
+Example:
+
+public void Deposit(decimal amount)
+{
+    balance += amount;
+}
+
+The BankAccount object can perform this behavior:
+
+BankAccount
+     │
+     ├── Deposit()
+     ├── Withdraw()
+     └── DisplayAccountInfo()
+
+So:
+
+Methods define what an object can do.
+
+9. What is a Constructor?
+
+A constructor is a special method used when an object is created.
+
+Example:
+
+new BankAccount("ACC-001", "Murtaza", 1000);
+
+When this happens:
+
+Object is created
+       ↓
+Constructor runs
+       ↓
+Object receives initial values
+
+The constructor initializes the object.
+
+C#
+public BankAccount(
+    string accountNumber,
+    string ownerName,
+    decimal initialBalance
+)
+{
+    this.accountNumber = accountNumber;
+    this.ownerName = ownerName;
+    balance = initialBalance;
+}
+10. What is a Block?
+
+A block is generally a group of statements treated as one unit.
+
+C# and Java use { }
+if (amount > 0)
+{
+    balance += amount;
+}
+
+The braces:
+
+{
+}
+
+create a block.
+
+A class itself also has a block:
+
+public class BankAccount
+{
+    // Everything inside belongs to the class
+}
+
+A method has a block:
+
+public void Deposit()
+{
+    // Method body
+}
+Python uses indentation instead
+if amount > 0:
+    self.balance += amount
+
+Python doesn't normally use {} blocks.
+
+The indentation defines the block.
+
+The Complete Mental Model 🧠
+
+Remember this:
+
+                    CLASS
+              BankAccount
+                    │
+        ┌───────────┴───────────┐
+        │                       │
+      STATE                  BEHAVIOR
+        │                       │
+        ▼                       ▼
+   Fields / Variables        Methods
+        │                       │
+        ├── ownerName          ├── Deposit()
+        ├── accountNumber      ├── Withdraw()
+        └── balance            └── DisplayInfo()
+
+Then:
+
+BankAccount CLASS
+       │
+       │ creates
+       ▼
+    OBJECTS
+       │
+ ┌─────┼─────┐
+ ▼     ▼     ▼
+ACC1  ACC2  ACC3
+Our OOP Learning Project 🏦
+
+From now on, we can continue using BankAccount and gradually make it more professional.
+
+We can explore concepts in this order:
+
+Class and Object ← Today
+Instance vs Static Members
+Encapsulation
+Properties / Getters and Setters
+Access Modifiers
+Constructors and Constructor Overloading
+Inheritance
+Polymorphism
+Abstraction
+Interfaces
+Composition
+Association, Aggregation, and Composition
+Method Overloading vs Overriding
+this, base, self, and super
+Static Classes and Members
+The complete professional OOP design of our Bank System
+
+The important idea is: we won't create random examples every time. We'll keep evolving BankAccount into a realistic OOP system so you can see why every concept exists.
+
+Today 8:41 PM
+explain Anonymous object  , Constructor  with rules and types, Constructor Overloading  , Difference between constructor & method   ,  static variable  , Advantage of static variable, static method, Restrictions for static method  , static block , this keyword , this()   
+
+Absolutely. We’ll continue with the same BankAccount example so all the OOP concepts connect together.
+
+Important: Some concepts—especially anonymous objects, static blocks, and this()—work differently in C#, Java, and Python. I'll clearly point that out.
+
+1. Anonymous Object
+
+An anonymous object is an object created without storing it in a variable/reference.
+
+Normally:
+
+Java
+BankAccount account = new BankAccount("ACC-001", "Murtaza", 1000);
+
+account.displayInfo();
+
+Here, the object has a reference:
+
+account ──────► BankAccount Object
+Anonymous Object
+new BankAccount("ACC-001", "Murtaza", 1000).displayInfo();
+
+We created the object and immediately used it.
+
+There is no variable like:
+
+BankAccount account;
+
+So conceptually:
+
+new BankAccount(...)
+          │
+          ▼
+     Object Created
+          │
+          ▼
+   Method Called Immediately
+Example
+new BankAccount("ACC-001", "Murtaza", 1000)
+    .deposit(500);
+Why use an anonymous object?
+
+Usually when:
+
+You only need the object once.
+You don't need to access it later.
+You want short code.
+
+⚠️ After this, you don't have a variable to use that object again.
+
+Anonymous Object in C#
+
+C# also has a special feature called an anonymous type, which is different from simply creating an unnamed temporary object.
+
+var account = new
+{
+    AccountNumber = "ACC-001",
+    OwnerName = "Murtaza",
+    Balance = 1000
+};
+
+This creates an anonymous type.
+
+Unlike a normal BankAccount class, you don't explicitly define a class.
+
+2. Constructor
+
+A constructor is a special member used to initialize an object when it is created.
+
+Example:
+
+BankAccount account =
+    new BankAccount("ACC-001", "Murtaza", 1000);
+
+When we write:
+
+new BankAccount(...)
+
+Java does approximately:
+
+1. Create memory for the object
+          ↓
+2. Call the constructor
+          ↓
+3. Initialize the object's data
+          ↓
+4. Return the object reference
+Constructor Example
+C#
+public class BankAccount
+{
+    private string accountNumber;
+    private string ownerName;
+    private decimal balance;
+
+    public BankAccount(
+        string accountNumber,
+        string ownerName,
+        decimal initialBalance)
+    {
+        this.accountNumber = accountNumber;
+        this.ownerName = ownerName;
+        balance = initialBalance;
+    }
+}
+
+Creating the object:
+
+BankAccount account =
+    new BankAccount("ACC-001", "Murtaza", 1000);
+
+The constructor automatically runs.
+
+Constructor Rules
+
+The basic rules in C# and Java are:
+
+Rule 1: Constructor name must match the class name
+class BankAccount
+{
+    BankAccount()
+    {
+    }
+}
+
+Correct ✅
+
+class BankAccount
+{
+    Account()
+    {
+    }
+}
+
+Wrong ❌ — this is not a constructor.
+
+Rule 2: A constructor has no return type
+
+Correct:
+
+BankAccount()
+{
+}
+
+Wrong:
+
+void BankAccount()
+{
+}
+
+⚠️ This is actually a method, not a constructor.
+
+Rule 3: It runs automatically when an object is created
+BankAccount account = new BankAccount();
+
+You don't manually call it like:
+
+account.BankAccount(); // ❌
+Rule 4: Constructors can have parameters
+BankAccount(String ownerName, double balance)
+{
+}
+Rule 5: Constructors can be overloaded
+
+We'll discuss this next.
+
+3. Types of Constructors
+
+The terminology can vary slightly between languages, but these are the most common types.
+
+1️⃣ Default Constructor
+
+A constructor with no parameters.
+
+public BankAccount()
+{
+    accountNumber = "UNKNOWN";
+    ownerName = "Unknown";
+    balance = 0;
+}
+
+Usage:
+
+BankAccount account = new BankAccount();
+2️⃣ Parameterized Constructor
+
+A constructor that receives parameters.
+
+public BankAccount(
+    String accountNumber,
+    String ownerName,
+    double balance)
+{
+    this.accountNumber = accountNumber;
+    this.ownerName = ownerName;
+    this.balance = balance;
+}
+
+Usage:
+
+BankAccount account =
+    new BankAccount("ACC-001", "Murtaza", 1000);
+3️⃣ Copy Constructor
+
+A constructor that creates a new object using another object.
+
+C#
+public BankAccount(BankAccount other)
+{
+    accountNumber = other.accountNumber;
+    ownerName = other.ownerName;
+    balance = other.balance;
+}
+
+Usage:
+
+BankAccount account1 =
+    new BankAccount("ACC-001", "Murtaza", 1000);
+
+BankAccount account2 =
+    new BankAccount(account1);
+
+Now account2 receives the values of account1.
+
+4. Constructor Overloading
+
+Constructor overloading means having multiple constructors in the same class with:
+
+The same name (the class name)
+Different parameters
+
+Example:
+
+public class BankAccount
+{
+    String accountNumber;
+    String ownerName;
+    double balance;
+
+
+    // Constructor 1
+    public BankAccount()
+    {
+        accountNumber = "UNKNOWN";
+        ownerName = "Unknown";
+        balance = 0;
+    }
+
+
+    // Constructor 2
+    public BankAccount(String ownerName)
+    {
+        this.ownerName = ownerName;
+        balance = 0;
+    }
+
+
+    // Constructor 3
+    public BankAccount(
+        String accountNumber,
+        String ownerName,
+        double balance)
+    {
+        this.accountNumber = accountNumber;
+        this.ownerName = ownerName;
+        this.balance = balance;
+    }
+}
+
+Now:
+
+BankAccount account1 = new BankAccount();
+BankAccount account2 =
+    new BankAccount("Murtaza");
+BankAccount account3 =
+    new BankAccount(
+        "ACC-001",
+        "Murtaza",
+        1000
+    );
+
+Java decides which constructor to call based on the arguments.
+
+5. Constructor vs Method
+
+This is extremely important.
+
+Constructor	Method
+Initializes an object	Performs an action
+Called automatically	Usually called manually
+Name matches class name (Java/C# traditional form)	Can have any valid name
+No return type	Can return a value
+Runs during object creation	Runs whenever called
+Cannot be called like a normal method	Can be called multiple times
+Constructor
+public BankAccount(String name)
+{
+    ownerName = name;
+}
+Method
+public void deposit(double amount)
+{
+    balance += amount;
+}
+
+Usage:
+
+BankAccount account =
+    new BankAccount("Murtaza");
+
+Constructor runs automatically ⬆️
+
+Then:
+
+account.deposit(500);
+
+The method runs because we called it ⬆️
+
+6. Static Variable
+
+A static variable belongs to the class itself, not to individual objects.
+
+Let's first understand the normal case.
+
+Instance Variable
+String ownerName;
+double balance;
+
+Every object has its own copy:
+
+BankAccount 1
+balance = 1000
+
+BankAccount 2
+balance = 500
+
+BankAccount 3
+balance = 2000
+Static Variable
+
+Suppose we want to know:
+
+How many bank accounts have been created?
+
+That information belongs to the BankAccount class, not to one individual account.
+
+public static int totalAccounts = 0;
+
+Example:
+
+public class BankAccount
+{
+    public static int totalAccounts = 0;
+
+    String ownerName;
+
+    public BankAccount(String ownerName)
+    {
+        this.ownerName = ownerName;
+
+        totalAccounts++;
+    }
+}
+
+Usage:
+
+BankAccount account1 =
+    new BankAccount("Murtaza");
+
+BankAccount account2 =
+    new BankAccount("Ali");
+
+BankAccount account3 =
+    new BankAccount("Ahmad");
+
+System.out.println(BankAccount.totalAccounts);
+
+Output:
+
+3
+Instance vs Static Variable
+CLASS: BankAccount
+
+Static Variable
+────────────────────
+totalAccounts = 3
+        ▲
+        │
+ Shared by everyone
+        │
+────────────────────
+
+Object 1          Object 2          Object 3
+balance=1000      balance=500       balance=2000
+owner=Murtaza     owner=Ali         owner=Ahmad
+7. Advantages of Static Variables
+1. Memory efficiency
+
+Instead of creating the same value for every object:
+
+Object 1 → bankName
+Object 2 → bankName
+Object 3 → bankName
+
+You can have one shared value:
+
+BankAccount Class
+
+bankName = "Kabul Bank"
+2. Shared information
+
+Example:
+
+public static String bankName = "Kabul Bank";
+
+Every account can access it.
+
+3. Global class-level information
+
+Useful for:
+
+Total number of objects
+Company name
+Configuration
+Shared settings
+Constants
+
+Example:
+
+public static int totalAccounts;
+8. Static Method
+
+A static method belongs to the class, not to an object.
+
+Example:
+
+public static void displayBankName()
+{
+    System.out.println("Kabul Bank");
+}
+
+You call it using the class name:
+
+BankAccount.displayBankName();
+
+Notice:
+
+ClassName.MethodName()
+
+No object is required.
+
+Example
+public class BankAccount
+{
+    public static String bankName = "Kabul Bank";
+
+    public static void displayBankName()
+    {
+        System.out.println(bankName);
+    }
+}
+
+Usage:
+
+BankAccount.displayBankName();
+9. Restrictions of Static Methods
+
+This is very important.
+
+Because a static method belongs to the class, it doesn't automatically know which object you mean.
+
+Consider:
+
+class BankAccount
+{
+    String ownerName;
+
+    static void displayOwner()
+    {
+        System.out.println(ownerName); // ❌
+    }
+}
+
+Why is this wrong?
+
+Imagine:
+
+Account 1 → Murtaza
+Account 2 → Ali
+Account 3 → Ahmad
+
+The static method asks:
+
+Which owner's name should I use? 🤔
+
+There is no specific object.
+
+Therefore:
+
+Static methods cannot directly access instance variables
+
+❌
+
+static void test()
+{
+    System.out.println(ownerName);
+}
+Static methods cannot directly call instance methods
+
+❌
+
+static void test()
+{
+    deposit(100);
+}
+
+Because deposit() belongs to a specific object.
+
+Static methods cannot use this
+
+❌
+
+static void test()
+{
+    System.out.println(this.ownerName);
+}
+
+this means:
+
+"The current object."
+
+But a static method has no current object.
+
+10. Static Block
+
+⚠️ Static blocks exist in Java but not in the same form in C#.
+
+A static block is used to initialize static data.
+
+Java
+public class BankAccount
+{
+    static String bankName;
+    static int totalAccounts;
+
+    static
+    {
+        bankName = "Kabul Bank";
+        totalAccounts = 0;
+
+        System.out.println("Bank system initialized!");
+    }
+}
+
+The static block runs once, when the class is initialized by the JVM.
+
+Execution
+BankAccount account =
+    new BankAccount();
+
+Before objects are used, the static initialization happens.
+
+Conceptually:
+
+Class Loaded
+     ↓
+Static Variables Initialized
+     ↓
+Static Block Runs
+     ↓
+Objects Can Be Created
+C# Equivalent
+
+C# usually uses a static constructor:
+
+public class BankAccount
+{
+    public static string BankName;
+
+    static BankAccount()
+    {
+        BankName = "Kabul Bank";
+
+        Console.WriteLine(
+            "Bank system initialized!"
+        );
+    }
+}
+
+This is the closest equivalent to Java's static block.
+
+11. The this Keyword
+
+The keyword:
+
+this
+
+means:
+
+The current object.
+
+Suppose:
+
+String ownerName;
+
+Then your constructor has:
+
+BankAccount(String ownerName)
+{
+    this.ownerName = ownerName;
+}
+
+There are two variables with the same name.
+
+ownerName parameter
+
+and:
+
+ownerName instance variable
+
+So:
+
+this.ownerName
+
+means:
+
+The ownerName belonging to the current object.
+
+While:
+
+ownerName
+
+means:
+
+The constructor parameter.
+
+Visual Explanation
+Constructor Parameter
+
+ownerName = "Murtaza"
+
+
+Current Object
+
+this.ownerName = ???
+
+Then:
+
+this.ownerName = ownerName;
+
+means:
+
+Current Object's ownerName
+           =
+Parameter's ownerName
+Example
+public class BankAccount
+{
+    String ownerName;
+
+    BankAccount(String ownerName)
+    {
+        this.ownerName = ownerName;
+    }
+}
+
+Creating:
+
+BankAccount account =
+    new BankAccount("Murtaza");
+
+Result:
+
+account
+   │
+   ▼
+
+BankAccount Object
+
+ownerName = "Murtaza"
+Other Uses of this
+1. Access current object's fields
+this.balance
+2. Call another method of the current object
+this.deposit(500);
+3. Call another constructor
+
+This is where:
+
+this()
+
+comes in.
+
+12. this() — Constructor Chaining
+
+In Java:
+
+this()
+
+means:
+
+Call another constructor from the same class.
+
+Let's look at this:
+
+public class BankAccount
+{
+    String accountNumber;
+    String ownerName;
+    double balance;
+
+
+    // Constructor 1
+    public BankAccount()
+    {
+        this("UNKNOWN", "Unknown", 0);
+    }
+
+
+    // Constructor 2
+    public BankAccount(String ownerName)
+    {
+        this("UNKNOWN", ownerName, 0);
+    }
+
+
+    // Constructor 3
+    public BankAccount(
+        String accountNumber,
+        String ownerName,
+        double balance)
+    {
+        this.accountNumber = accountNumber;
+        this.ownerName = ownerName;
+        this.balance = balance;
+    }
+}
+
+Now:
+
+BankAccount account1 =
+    new BankAccount();
+
+Calls:
+
+Constructor 1
+       ↓
+this("UNKNOWN", "Unknown", 0)
+       ↓
+Constructor 3
+
+Another:
+
+BankAccount account2 =
+    new BankAccount("Murtaza");
+
+Calls:
+
+Constructor 2
+       ↓
+this("UNKNOWN", "Murtaza", 0)
+       ↓
+Constructor 3
+Why use this()?
+
+Without this(), you might repeat code:
+
+BankAccount()
+{
+    accountNumber = "UNKNOWN";
+    ownerName = "Unknown";
+    balance = 0;
+}
+BankAccount(String ownerName)
+{
+    accountNumber = "UNKNOWN";
+    this.ownerName = ownerName;
+    balance = 0;
+}
+BankAccount(String accountNumber,
+            String ownerName,
+            double balance)
+{
+    this.accountNumber = accountNumber;
+    this.ownerName = ownerName;
+    this.balance = balance;
+}
+
+This repeats initialization logic.
+
+Instead:
+
+Constructor 1 ──┐
+                │
+Constructor 2 ──┼──► Main Constructor
+                │
+Constructor 3 ──┘
+
+This is called:
+
+Constructor Chaining
+
+Important Rule of this()
+
+In Java:
+
+this() must be the first statement inside a constructor.
+
+Correct:
+
+public BankAccount()
+{
+    this("UNKNOWN", "Unknown", 0);
+}
+
+Wrong:
+
+public BankAccount()
+{
+    System.out.println("Creating account");
+
+    this("UNKNOWN", "Unknown", 0); // ❌
+}
+
+Because this() must come first.
+
+! - C# Equivalent
+=====================> code in C# <===============
+public class BankAccount
+{
+    private string accountNumber;
+    private string ownerName;
+    private decimal balance;
+
+
+    public BankAccount()
+        : this("UNKNOWN", "Unknown", 0)
+    {
+    }
+
+
+    public BankAccount(string ownerName)
+        : this("UNKNOWN", ownerName, 0)
+    {
+    }
+
+
+    public BankAccount(
+        string accountNumber,
+        string ownerName,
+        decimal balance)
+    {
+        this.accountNumber = accountNumber;
+        this.ownerName = ownerName;
+        this.balance = balance;
+    }
+}
+BankAccount account =
+    new BankAccount("Murtaza");
+
+======================> code in Python <=================
+class BankAccount:
+
+    def __init__(
+        self,
+        account_number="UNKNOWN",
+        owner_name="Unknown",
+        balance=0
+    ):
+        self.account_number = account_number
+        self.owner_name = owner_name
+        self.balance = balance
+
+    account1 = BankAccount()
+    account2 = BankAccount(
+    "ACC-001",
+    "Murtaza",
+    1000
+)
+
+Note : a Summarization of the above topic in Java.
+public class BankAccount
+{
+    // ==========================
+    // STATIC VARIABLES
+    // ==========================
+
+    static String bankName;
+    static int totalAccounts;
+
+
+    // ==========================
+    // STATIC BLOCK
+    // ==========================
+
+    static
+    {
+        bankName = "Kabul Bank";
+        totalAccounts = 0;
+
+        System.out.println("Bank system initialized!");
+    }
+
+
+    // ==========================
+    // INSTANCE VARIABLES
+    // ==========================
+
+    private String accountNumber;
+    private String ownerName;
+    private double balance;
+
+
+    // ==========================
+    // DEFAULT CONSTRUCTOR
+    // ==========================
+
+    public BankAccount()
+    {
+        this("UNKNOWN", "Unknown", 0);
+    }
+
+
+    // ==========================
+    // PARAMETERIZED CONSTRUCTOR
+    // ==========================
+
+    public BankAccount(String ownerName)
+    {
+        this("UNKNOWN", ownerName, 0);
+    }
+
+
+    // ==========================
+    // MAIN CONSTRUCTOR
+    // ==========================
+
+    public BankAccount(
+        String accountNumber,
+        String ownerName,
+        double balance)
+    {
+        this.accountNumber = accountNumber;
+        this.ownerName = ownerName;
+        this.balance = balance;
+
+        totalAccounts++;
+    }
+
+
+    // ==========================
+    // INSTANCE METHOD
+    // ==========================
+
+    public void deposit(double amount)
+    {
+        if (amount > 0)
+        {
+            this.balance += amount;
+        }
+    }
+
+
+    // ==========================
+    // STATIC METHOD
+    // ==========================
+
+    public static void displayBankInfo()
+    {
+        System.out.println(
+            "Bank: " + bankName
+        );
+
+        System.out.println(
+            "Total Accounts: " + totalAccounts
+        );
+    }
+}
+
+BankAccount account1 =
+    new BankAccount(
+        "ACC-001",
+        "Murtaza",
+        1000
+    );
+
+BankAccount account2 =
+    new BankAccount("Ali");
+
+account1.deposit(500);
+
+BankAccount.displayBankInfo();
