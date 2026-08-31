@@ -1,0 +1,265 @@
+﻿Object Oriented : It is a programming paradigm where we organize programs around objects.
+
+Instead of thinking only:
+
+"What functions should my program perform?"
+
+OOP also asks:
+
+"What things (objects) exist in my system, what data do they have, and what can they do?"
+
+For example, in a banking system:
+
+A BankAccount
+A Customer
+A Bank
+A Transaction
+
+Each of these can be represented as an object.
+
+
+Class : A class is a blueprint, template, or definition used to create objects.
+
+======================> code in C# <=================
+
+public class BankAccount
+{
+    // =========================================
+    // 1. FIELDS / INSTANCE VARIABLES
+    // =========================================
+
+    private string accountNumber;
+    private string ownerName;
+    private decimal balance;
+
+
+    // =========================================
+    // 2. CONSTRUCTOR
+    // =========================================
+
+    public BankAccount(string accountNumber, string ownerName, decimal initialBalance)
+    {
+        this.accountNumber = accountNumber;
+        this.ownerName = ownerName;
+        balance = initialBalance;
+    }
+
+
+    // =========================================
+    // 3. METHODS
+    // =========================================
+
+    public void Deposit(decimal amount)
+    {
+        if (amount > 0)
+        {
+            balance += amount;
+            Console.WriteLine($"Deposited: {amount}");
+        }
+    }
+
+    public void Withdraw(decimal amount)
+    {
+        if (amount > 0 && amount <= balance)
+        {
+            balance -= amount;
+            Console.WriteLine($"Withdrawn: {amount}");
+        }
+        else
+        {
+            Console.WriteLine("Invalid withdrawal.");
+        }
+    }
+
+    public void DisplayAccountInfo()
+    {
+        Console.WriteLine("----- BANK ACCOUNT -----");
+        Console.WriteLine($"Account Number: {accountNumber}");
+        Console.WriteLine($"Owner: {ownerName}");
+        Console.WriteLine($"Balance: {balance}");
+    }
+}
+
+------------- Creating Objects ----------------
+BankAccount account1 =
+    new BankAccount("ACC-001", "Murtaza", 1000);
+
+account1.Deposit(500);
+
+account1.Withdraw(200);
+
+account1.DisplayAccountInfo();
+
+=============================> code in Jave <========================
+public class BankAccount {
+
+    // =========================================
+    // 1. FIELDS / INSTANCE VARIABLES
+    // =========================================
+
+    private String accountNumber;
+    private String ownerName;
+    private double balance;
+
+
+    // =========================================
+    // 2. CONSTRUCTOR
+    // =========================================
+
+    public BankAccount(
+        String accountNumber,
+        String ownerName,
+        double initialBalance
+    ) {
+        this.accountNumber = accountNumber;
+        this.ownerName = ownerName;
+        this.balance = initialBalance;
+    }
+
+
+    // =========================================
+    // 3. METHODS
+    // =========================================
+
+    public void deposit(double amount) {
+
+        if (amount > 0) {
+            balance += amount;
+
+            System.out.println(
+                "Deposited: " + amount
+            );
+        }
+    }
+
+
+    public void withdraw(double amount) {
+
+        if (amount > 0 && amount <= balance) {
+
+            balance -= amount;
+
+            System.out.println(
+                "Withdrawn: " + amount
+            );
+
+        } else {
+
+            System.out.println(
+                "Invalid withdrawal."
+            );
+        }
+    }
+
+
+    public void displayAccountInfo() {
+
+        System.out.println("----- BANK ACCOUNT -----");
+
+        System.out.println(
+            "Account Number: " + accountNumber
+        );
+
+        System.out.println(
+            "Owner: " + ownerName
+        );
+
+        System.out.println(
+            "Balance: " + balance
+        );
+    }
+}
+
+------------- Creating Objects -----
+BankAccount account1 =
+    new BankAccount(
+        "ACC-001",
+        "Murtaza",
+        1000
+    );
+
+account1.deposit(500);
+
+account1.withdraw(200);
+
+account1.displayAccountInfo();
+
+
+==================================> code in Python <====================
+class BankAccount:
+
+    # =========================================
+    # 1. CONSTRUCTOR
+    # =========================================
+
+    def __init__(
+        self,
+        account_number,
+        owner_name,
+        initial_balance
+    ):
+
+        # =====================================
+        # 2. INSTANCE VARIABLES
+        # =====================================
+
+        self.account_number = account_number
+        self.owner_name = owner_name
+        self.balance = initial_balance
+
+
+    # =========================================
+    # 3. METHODS
+    # =========================================
+
+    def deposit(self, amount):
+
+        if amount > 0:
+            self.balance += amount
+
+            print(f"Deposited: {amount}")
+
+
+    def withdraw(self, amount):
+
+        if amount > 0 and amount <= self.balance:
+
+            self.balance -= amount
+
+            print(f"Withdrawn: {amount}")
+
+        else:
+
+            print("Invalid withdrawal.")
+
+
+    def display_account_info(self):
+
+        print("----- BANK ACCOUNT -----")
+
+        print(
+            f"Account Number: {self.account_number}"
+        )
+
+        print(
+            f"Owner: {self.owner_name}"
+        )
+
+        print(
+            f"Balance: {self.balance}"
+        )
+
+------------------ Creating objects ------------
+account1 = BankAccount(
+    "ACC-001",
+    "Murtaza",
+    1000
+)
+
+account1.deposit(500)
+
+account1.withdraw(200)
+
+account1.display_account_info()
+
+
