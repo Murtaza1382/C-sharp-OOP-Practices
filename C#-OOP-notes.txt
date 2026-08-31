@@ -18,7 +18,7 @@ A Transaction
 Each of these can be represented as an object.
 
 
-Class : A class is a blueprint, template, or definition used to create objects.
+ -= Class : A class is a blueprint, template, or definition used to create objects.
 
 ======================> code in C# <=================
 
@@ -262,4 +262,120 @@ account1.withdraw(200)
 
 account1.display_account_info()
 
+ -= Anonymous Object : An anonymous object is an object created without storing it in a variable/reference.
 
+ ======================> code in C# <=================
+var account = new
+{
+    AccountNumber = "ACC-001",
+    OwnerName = "Murtaza",
+    Balance = 1000
+};
+
+new BankAccount("ACC-001", "Murtaza", 1000).displayInfo();
+======================> code in Java <=================
+
+new BankAccount("ACC-001", "Murtaza", 1000).displayInfo();
+
+ -= Constructor : A constructor is a special member used to initialize an object when it is created.
+ 
+  -= Constructor Rules : The basic rules in C# and Java are !
+        - Constructor name must match the class name.
+        - A constructor has no return type.
+        - It runs automatically when an object is created.
+        - Constructors can have parameters.
+        - Constructors can be overloaded
+
+ -= Types of Constructors : The terminology can vary slightly between languages, but these are the most common types.
+        - Default Constructor : A constructor with no parameters.
+        ============> code in Java <========
+            public BankAccount()
+                    {
+                        accountNumber = "UNKNOWN";
+                        ownerName = "Unknown";
+                        balance = 0;
+                    }
+                    BankAccount account = new BankAccount();
+        - Parameterized Constructor : A constructor that receives parameters.
+        ============> code . in Java <=============
+            public BankAccount(
+                        String accountNumber,
+                        String ownerName,
+                        double balance)
+                    {
+                        this.accountNumber = accountNumber;
+                        this.ownerName = ownerName;
+                        this.balance = balance;
+                    }
+
+                    BankAccount account = new BankAccount("ACC-001", "Murtaza", 1000);
+        - Copy Constructor : A constructor that creates a new object using another object.
+        public BankAccount(BankAccount other)
+                    {
+                        accountNumber = other.accountNumber;
+                        ownerName = other.ownerName;
+                        balance = other.balance;
+                    }
+                    BankAccount account1 =
+                            new BankAccount("ACC-001", "Murtaza", 1000);
+
+                        BankAccount account2 =
+                            new BankAccount(account1);
+        - Constructor Overloading : Constructor overloading means having multiple constructors in the same class with:
+               . The same name (the class name)
+               . Different parameters
+    =========================> code in Java <==========
+                    public class BankAccount
+                {
+                    String accountNumber;
+                    String ownerName;
+                    double balance;
+
+
+                    // Constructor 1
+                    public BankAccount()
+                    {
+                        accountNumber = "UNKNOWN";
+                        ownerName = "Unknown";
+                        balance = 0;
+                    }
+
+
+                    // Constructor 2
+                    public BankAccount(String ownerName)
+                    {
+                        this.ownerName = ownerName;
+                        balance = 0;
+                    }
+
+
+                    // Constructor 3
+                    public BankAccount(
+                        String accountNumber,
+                        String ownerName,
+                        double balance)
+                    {
+                        this.accountNumber = accountNumber;
+                        this.ownerName = ownerName;
+                        this.balance = balance;
+                    }
+                }
+
+                BankAccount account1 = new BankAccount();
+                BankAccount account2 = new BankAccount("Murtaza");
+                BankAccount account2 = new BankAccount("Murtaza");
+
+ -= Static Variable : A static variable belongs to the class itself, not to individual objects.
+ ==============> code in Java <==============
+ public static int totalAccounts = 0;
+
+  -= Advantages of Static Variables : 
+        - Memory efficiency : Instead of creating the same value for every object, You can have one shared value.
+        - Shared information : Example: public static String bankName = "Kabul Bank";
+        - Global class-level information : Useful for:
+            . Total number of objects
+            . Company name
+            . Configuration
+            . Shared settings
+            . Constants
+-= Static Method : A static method belongs to the class, not to an object.
